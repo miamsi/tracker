@@ -112,74 +112,7 @@ def init_groq():
 
 groq_client = init_groq()
 
-# Fallback In-Memory Initial Seed Data (From enhanced model_3.xlsx)
-def init_session_demo_data():
-    if "demo_income" not in st.session_state:
-        st.session_state.demo_income = pd.DataFrame([
-            {"id": "1", "date": "2026-09-01", "description": "Last month leftover gapok", "amount": 1889883},
-            {"id": "2", "date": "2026-09-01", "description": "Last month leftover tukin", "amount": 1552497},
-            {"id": "3", "date": "2026-09-01", "description": "gapok", "amount": 2798600},
-            {"id": "4", "date": "2026-09-01", "description": "tukin", "amount": 11450000},
-        ])
-    if "demo_fix_spendings" not in st.session_state:
-        st.session_state.demo_fix_spendings = pd.DataFrame([
-            {"id": "1", "date": "2026-09-01", "description": "Cicilan kartu kredit", "amount": 1936863},
-            {"id": "2", "date": "2026-09-01", "description": "Iuran kantor", "amount": 200000},
-            {"id": "3", "date": "2026-09-01", "description": "Bulanan ke rumah", "amount": 2002500},
-            {"id": "4", "date": "2026-09-02", "description": "Rumah dinas", "amount": 25000},
-        ])
-    if "demo_savings" not in st.session_state:
-        st.session_state.demo_savings = pd.DataFrame([
-            {"id": "1", "date": "2026-09-01", "description": "Tabungan rutin", "amount": 3830000},
-        ])
-    if "demo_encumbrance" not in st.session_state:
-        st.session_state.demo_encumbrance = pd.DataFrame([
-            {"id": "1", "description": "Beli tiket bus tua", "amount": 1500000},
-            {"id": "2", "description": "Jatah konsumsi harian", "amount": 4650000},
-            {"id": "3", "description": "Listrik", "amount": 305000},
-            {"id": "4", "description": "Bensin", "amount": 200000},
-            {"id": "5", "description": "Keperluan rumah", "amount": 300000},
-            {"id": "6", "description": "Subscription", "amount": 150000},
-            {"id": "7", "description": "Paket Internet", "amount": 600000},
-            {"id": "8", "description": "Entertainment", "amount": 300000},
-        ])
-    if "demo_wallets" not in st.session_state:
-        st.session_state.demo_wallets = pd.DataFrame([
-            {"id": "1", "description": "Starbucks Card", "amount": 8500},
-            {"id": "2", "description": "Ovo", "amount": 5680},
-            {"id": "3", "description": "Gopay", "amount": 1250},
-            {"id": "4", "description": "E-Money", "amount": 14000},
-            {"id": "5", "description": "Dana", "amount": 4500},
-            {"id": "6", "description": "Cash on hand", "amount": 10000},
-            {"id": "7", "description": "Shopee Pay", "amount": 12019},
-        ])
-    if "demo_records" not in st.session_state:
-        st.session_state.demo_records = pd.DataFrame([
-            {"id": "1", "date": "2026-09-01", "description": "Sarapan ketoprak mas aris", "allocation": "Jatah konsumsi harian", "cash_basis": -44000, "receivables": 22000, "acrual_basis": -22000},
-            {"id": "2", "date": "2026-09-01", "description": "Sarapan ketoprak mas aris", "allocation": "Jatah konsumsi harian", "cash_basis": 22000, "receivables": -22000, "acrual_basis": 0},
-            {"id": "3", "date": "2026-09-01", "description": "Top up starbucks", "allocation": "Buffer", "cash_basis": -100000, "receivables": 0, "acrual_basis": -100000},
-            {"id": "4", "date": "2026-09-01", "description": "Top up starbucks", "allocation": "Starbucks Card", "cash_basis": 100000, "receivables": 0, "acrual_basis": 100000},
-            {"id": "5", "date": "2026-09-01", "description": "Beli starbucks", "allocation": "Starbucks Card", "cash_basis": -49000, "receivables": 0, "acrual_basis": -49000},
-            {"id": "6", "date": "2026-09-01", "description": "Beli starbucks", "allocation": "Jatah konsumsi harian", "cash_basis": -49000, "receivables": 24500, "acrual_basis": -24500},
-            {"id": "7", "date": "2026-09-01", "description": "Beli starbucks", "allocation": "Jatah konsumsi harian", "cash_basis": 24500, "receivables": -24500, "acrual_basis": 0},
-            {"id": "8", "date": "2026-09-01", "description": "Beli starbucks", "allocation": "Buffer", "cash_basis": 49000, "receivables": 0, "acrual_basis": 49000},
-            {"id": "9", "date": "2026-09-01", "description": "Parkir", "allocation": "E-Money", "cash_basis": -6000, "receivables": 0, "acrual_basis": -6000},
-            {"id": "10", "date": "2026-09-01", "description": "Makan malam", "allocation": "Jatah konsumsi harian", "cash_basis": -56100, "receivables": 0, "acrual_basis": -56100},
-            {"id": "11", "date": "2026-09-01", "description": "Tiket bioskop", "allocation": "Entertainment", "cash_basis": -40000, "receivables": 0, "acrual_basis": -40000},
-            {"id": "12", "date": "2026-09-01", "description": "Tarik uang", "allocation": "Buffer", "cash_basis": -100000, "receivables": 0, "acrual_basis": -100000},
-            {"id": "13", "date": "2026-09-01", "description": "Tarik uang", "allocation": "Cash on hand", "cash_basis": 100000, "receivables": 0, "acrual_basis": 100000},
-            {"id": "14", "date": "2026-09-01", "description": "Isi bensin", "allocation": "Bensin", "cash_basis": -67000, "receivables": 0, "acrual_basis": -67000},
-            {"id": "15", "date": "2026-09-01", "description": "Isi bensin", "allocation": "Cash on hand", "cash_basis": -67000, "receivables": 0, "acrual_basis": -67000},
-            {"id": "16", "date": "2026-09-01", "description": "Isi bensin", "allocation": "Buffer", "cash_basis": 67000, "receivables": 0, "acrual_basis": 67000},
-            {"id": "17", "date": "2026-09-02", "description": "Iuran tambahan kantor", "allocation": "Buffer", "cash_basis": -50000, "receivables": 0, "acrual_basis": -50000},
-            {"id": "18", "date": "2026-09-02", "description": "Sarapan kopi kaya", "allocation": "Jatah konsumsi harian", "cash_basis": -42000, "receivables": 0, "acrual_basis": -42000},
-            {"id": "19", "date": "2026-09-02", "description": "Tiket bus tua", "allocation": "Beli tiket bus tua", "cash_basis": -1500000, "receivables": 0, "acrual_basis": -1500000},
-            {"id": "20", "date": "2026-09-02", "description": "Beli point", "allocation": "Jatah konsumsi harian", "cash_basis": -21000, "receivables": 0, "acrual_basis": -21000},
-            {"id": "21", "date": "2026-09-02", "description": "Beli kopi orang", "allocation": "Buffer", "cash_basis": -123000, "receivables": 123000, "acrual_basis": 0},
-            {"id": "22", "date": "2026-09-02", "description": "Beli kopi orang", "allocation": "Buffer", "cash_basis": 25000, "receivables": -25000, "acrual_basis": 0},
-        ])
 
-init_session_demo_data()
 
 # Auth System
 if "user" not in st.session_state:
