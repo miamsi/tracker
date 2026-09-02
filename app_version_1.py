@@ -421,10 +421,13 @@ with tabs[0]:
 with tabs[1]:
     st.subheader("📝 Journal & Transaction Entry")
     
-    # Dynamic Allocations List for Dropdowns & Prompt
+    # Dynamic Allocations List for Dropdowns & Prompt (Safely handles empty tables)
     enc_df = get_data("encumbrance")
     wallets_df = get_data("wallets")
-    all_allocations = ["Buffer"] + list(enc_df["description"].unique()) + list(wallets_df["description"].unique())
+    
+    enc_list = list(enc_df["description"].unique()) if "description" in enc_df.columns else []
+    wallets_list = list(wallets_df["description"].unique()) if "description" in wallets_df.columns else []
+    all_allocations = ["Buffer"] + enc_list + wallets_list
     
     entry_mode = st.radio("Entry Mode", ["🤖 Groq AI Natural Language Assistant", "📱 Phone-Friendly Manual Entry"], horizontal=True)
     
