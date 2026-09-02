@@ -457,7 +457,7 @@ with tabs[1]:
                         """
                         try:
                             response = groq_client.chat.completions.create(
-                                model="llama3-70b-8192",
+                                model="openai/gpt-oss-120b",
                                 messages=[
                                     {"role": "system", "content": system_prompt},
                                     {"role": "user", "content": f"Today: {datetime.date.today()}. Input: {tx_input}"}
